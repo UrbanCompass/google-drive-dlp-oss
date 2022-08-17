@@ -1,0 +1,24 @@
+<div class="m_763974036656301042gmail-container"
+     style="box-sizing:border-box;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto">
+
+    <center><img height="80px" width="80px" src="https://oauth-manager-public-assets.s3.amazonaws.com/assets/infosec-logo.png" class="CToWUd"></center>
+
+    <h4 style="box-sizing:border-box;font-family:inherit;font-weight:500;line-height:1.1;color:inherit;margin-top:20px;margin-bottom:10px">
+        <font size="4">
+            This is a notification that {{ event['actorEmail'] }} triggered the <b>{{ event['triggeredPolicy'] }}</b> policy by sharing file {{ event['resourceName'] }} containing {{ event['matchedDetectors'] }}. Over-permissioned access to this file has been revoked by COMPANY NAME's data loss prevention. Files containing sensitive data should be shared explicitly with groups, teams, or individuals whose roles require it. <br><br>
+
+            You can learn more about securely sharing Google Drive documents <a href="LINK TO INTERNAL DOCS">here</a>.<br><br>
+            If you feel this access was revoked in error, please contact CONTACT EMAIL. See violation details below.</font></h4>
+
+    
+    <div class="m_763974036656301042gmail-alert m_763974036656301042gmail-alert-danger"
+         style="box-sizing:border-box;padding:10px;margin-bottom:15px;border:1px solid rgb(235,204,209);border-radius:4px;color:rgb(169,68,66);background-color:rgb(242,222,222)">
+        <strong style="box-sizing:border-box;font-weight:700">
+             Document Owner: {{ event['resourceOwnerEmail'] }}<br>
+             Document Name: {{ event['resourceName'] }}<br>
+             Document ID: {{ event['resourceId'] }}<br>
+             Violated Policy: {{ event['triggeredPolicy'] }}<br>
+             Actor: {{ event['actorEmail'] }}<br>
+        </strong>
+    </div>
+</div>

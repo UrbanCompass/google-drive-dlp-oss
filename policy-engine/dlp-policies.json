@@ -1,0 +1,52 @@
+{
+	"policies":[
+		{
+			"policyName": "Identify discoverable PII",
+			"policyDescription": "Alert admins when file containing SSN or bank # is made searchable by the domain or anyone",
+			"matchedDetectors": ["US_SOCIAL_SECURITY_NUMBER", "US_BANK_ROUTING_MICR"],
+			"ous": ["Staff"],
+			"allowFileDiscovery": "True",
+			"responseActions": ["Revoke access", "Send admin notification", "Send user notification"]
+		},
+		{
+			"policyName": "Identify public sharing of PII",
+			"policyDescription": "Alert admins when file containing ssn, bank routing is made public",
+			"matchedDetectors": ["US_SOCIAL_SECURITY_NUMBER", "US_BANK_ROUTING_MICR"],
+			"ous": ["Staff"],
+			"type": "anyone",
+			"responseActions": ["Revoke access", "Send admin notification", "Send user notification"]
+		},
+		{
+			"policyName": "Identify domain sharing of PII",
+			"policyDescription": "Alert admins when file containing ssn, bank routing is made public",
+			"matchedDetectors": ["US_SOCIAL_SECURITY_NUMBER", "US_BANK_ROUTING_MICR"],
+			"ous": ["Staff"],
+			"type": "domain",
+			"responseActions": ["Revoke access", "Send admin notification", "Send user notification"]
+		},
+		{
+			"policyName": "Identify discoverable PII [Audit-Only]",
+			"policyDescription": "Alert admins when file containing SSN or bank # is made searchable by the domain or anyone",
+			"matchedDetectors": ["US_SOCIAL_SECURITY_NUMBER", "US_BANK_ROUTING_MICR"],
+			"ous": ["*"],
+			"allowFileDiscovery": "True",
+			"responseActions": ["Send admin notification"]
+		},
+		{
+			"policyName": "Identify public sharing of PII [Audit-Only]",
+			"policyDescription": "Alert admins when file containing ssn, bank routing is made public",
+			"matchedDetectors": ["US_SOCIAL_SECURITY_NUMBER", "US_BANK_ROUTING_MICR"],
+			"ous": ["*"],
+			"type": "anyone",
+			"responseActions": ["Send admin notification"]
+		},
+		{
+			"policyName": "Identify domain sharing of PII [Audit-Only]",
+			"policyDescription": "Alert admins when file containing ssn, bank routing is made public",
+			"matchedDetectors": ["US_SOCIAL_SECURITY_NUMBER", "US_BANK_ROUTING_MICR"],
+			"ous": ["*"],
+			"type": "domain",
+			"responseActions": ["Send admin notification"]
+		}
+	]
+}

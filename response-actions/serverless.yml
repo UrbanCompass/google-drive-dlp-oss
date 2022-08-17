@@ -1,0 +1,44 @@
+org: ashl337
+app: google-drive-dlp-oss
+service: drive-dlp-response-actions
+
+frameworkVersion: '2'
+
+plugins:
+  - serverless-python-requirements
+custom:
+  pythonRequirements:
+    dockerizePip: False
+
+provider:
+  name: aws
+  runtime: python3.9
+  timeout: 240
+  lambdaHashingVersion: 20201221
+  iam:
+    role:
+      statements: 
+        - Effect: Allow
+          Action: 
+            - dynamodb:DescribeStream
+            - dynamodb:GetRecords
+            - dynamodb:GetShardIterator
+            - dynamodb:ListStreams
+            - dynamodb:UpdateItem
+          Resource: ${param:DynamoARN}
+        - Effect: Allow
+          Action: 
+            - secretsmanager:GetSecretValue
+          Resource: ${param:SecretValueARN}
+        - Effect: Allow
+          Action:
+            - ses:SendEmail
+          Resource: ${param:SESARN}
+
+functions:
+  actions:
+    handler: response-actions.main
+    events:
+      - stream: ${param:StreamARN}
+    environment:
+      DELEGATED_ADMIN: ${param:DelegatedUser}

@@ -1,0 +1,5 @@
+jinja2==2.10
+google-api-python-client==1.6.6
+httplib2==0.10.3
+python-dateutil==2.6.1
+markupsafe==2.0.1

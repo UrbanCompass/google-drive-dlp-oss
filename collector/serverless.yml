@@ -1,0 +1,37 @@
+org: ashl337
+app: google-drive-dlp-oss
+service: drive-dlp-collector
+
+frameworkVersion: '2'
+
+plugins:
+  - serverless-python-requirements
+custom:
+  pythonRequirements:
+    dockerizePip: False
+
+provider:
+  name: aws
+  runtime: python3.9
+  timeout: 240
+  lambdaHashingVersion: 20201221
+  iam:
+    role:
+      statements: 
+        - Effect: Allow
+          Action: 
+            - dynamodb:PutItem
+          Resource: ${param:DynamoARN}
+        - Effect: Allow
+          Action: 
+            - secretsmanager:GetSecretValue
+          Resource: ${param:SecretValueARN}
+
+functions:
+  collector:
+    handler: collector.main
+    events:
+      # Invoke Lambda function every minute
+      - schedule: rate(1 minute)
+    environment:
+      DELEGATED_ADMIN: ${param:DelegatedUser}
